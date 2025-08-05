@@ -1,0 +1,29 @@
+FROM oven/bun:1.1.13-alpine
+
+WORKDIR /usr/src/app
+
+# Copy package files, install dependencies, etc.
+COPY package*.json ./
+
+RUN bun install
+
+COPY . .
+
+EXPOSE 5001
+
+CMD [ "bun", "index.ts" ]
+
+#docker build -t node-dockerize .
+#docker run -p 5001:5001 -d node-dockerize
+#docker login -u bishalm626@gmail.com
+#docker tag node-dockerize bishal360/node-dockerize:1.0
+#docker push bishal360/node-dockerize:1.0
+#choco install minikube -y {in powershell}
+#minikube start
+#kubectl create deployment node-dockerize --image=bishal360/node-dockerize:1.0 --dry-run=client -o yaml > deployment.yaml
+#kubectl apply -f deployment.yaml
+#kubectl expose deployment node-dockerize --port=80 --target-port=5001 --type=LoadBalancer --dry-run=client -o yaml > service.yaml
+#kubectl apply -f service.yaml
+#minikube service node-dockerize --url
+#to know detail describe: run--> kubectl describe deployment node-dockerize
+#for servide description: run--> kubectl describe service deployment node-dockerize
