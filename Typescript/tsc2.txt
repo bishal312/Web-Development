@@ -1,0 +1,12 @@
+sec-2
+//Type Inference
+//>Understanding type Inference
+//>Type annotations
+
+sec-3
+Interfaces and Type Aliases
+>Defining Interfaces
+>Using interfaces to efine object shapes
+>Extending interfaces
+>Type Aliases
+>Intersecction types
