@@ -40,11 +40,10 @@ const ChatPage = () => {
   const chatClientRef = useRef<StreamChat | null>(null);
   useEffect(() => {
     const initChat = async () => {
-      if (!tokenData?.token || !authUser) return;
+      if (!authUser || !tokenData?.token || !targetUid) return;
 
       try {
         const client = StreamChat.getInstance(Stream_API_KEY);
-
 
         await client.connectUser(
           {
@@ -64,9 +63,8 @@ const ChatPage = () => {
         chatClientRef.current = client;
         setChatClient(client);
         setChannel(currentChannel);
-        setLoading(false);
       } catch (error) {
-        console.error(error);
+        console.error("Stream init failed:", error);
       } finally {
         setLoading(false);
       }
@@ -75,9 +73,10 @@ const ChatPage = () => {
     initChat();
 
     return () => {
-      chatClientRef.current?.disconnectUser();
+      chatClientRef.current?.disconnectUser().catch(console.error);
     };
   }, [authUser, targetUid, tokenData?.token, imageUrl]);
+
   if (loading || !chatClient || !channel) return <ChatLoader />;
 
   return (
