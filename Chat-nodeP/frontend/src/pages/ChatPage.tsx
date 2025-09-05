@@ -28,7 +28,7 @@ const ChatPage = () => {
   const BASE_URL = import.meta.env.VITE_API_URL;
 
   const imageUrl = authUser?.profilePic
-    ? `${BASE_URL}uploads/${authUser.profilePic}`
+    ? `${BASE_URL}/uploads/${authUser.profilePic}`
     : `${BASE_URL}/uploads/user.svg`;
 
   const { data: tokenData } = useQuery({
