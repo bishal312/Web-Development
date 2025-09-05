@@ -1,7 +1,7 @@
 import { axiosInstance } from "./axios";
 
 export const getAuthUser = async () => {
-  const res = await axiosInstance.get("/auth/me");
+  const res = await axiosInstance.get("/api/auth/me");
   return res.data;
 };
 
@@ -28,21 +28,21 @@ export const register = async (signUpData: {
 };
 
 export const login = async (loginData: object) => {
-  const response = await axiosInstance.post("/auth/login", loginData);
+  const response = await axiosInstance.post("/api/auth/login", loginData);
   return response.data;
 };
 
 export const logout = async () => {
-  const response = await axiosInstance.post("/auth/logout");
+  const response = await axiosInstance.post("/api/auth/logout");
   return response.data;
 };
 
 export const getAllUsers = async () => {
-  const response = await axiosInstance.get("/users");
+  const response = await axiosInstance.get("/api/users");
   return response.data;
 };
 
 export const getStreamToken = async () =>{
-  const response = await axiosInstance.get("/chat/token");
+  const response = await axiosInstance.get("/api/chat/token");
   return response.data;
 }
