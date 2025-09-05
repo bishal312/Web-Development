@@ -1,0 +1,13 @@
+{
+  "username":"bsal",
+  "role": "mentor",
+  "email": "bishal@gmail.com",
+  "password": "bking1212"
+}
+
+{
+  "username":"roshan",
+  "role": "student",
+  "email": "roshan@gmail.com",
+  "password": "roshan1212"
+}

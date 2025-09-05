@@ -1,0 +1,43 @@
+import express from "express";
+import cors from "cors";
+import authRoutes from "./routes/auth.route";
+import cookieParser from "cookie-parser";
+import { connectDb } from "./lib/db";
+import chatRoutes from "./routes/chat.route";
+import allUser from ".//routes/user.route";
+import path from "path";
+import { fileURLToPath } from "url";
+
+import dotenv from "dotenv";
+dotenv.config();
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const app = express();
+app.use(express.json());
+app.use(cookieParser());
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    credentials: true,
+  })
+);
+app.get("/", (req, res) => {
+  res.send("API is running");
+});
+app.use(express.static(path.join(__dirname, "../public")));
+
+app.use("/api/auth", authRoutes);
+app.use("/api/users", allUser);
+app.use("/api/chat", chatRoutes);
+
+const PORT = process.env.PORT || 5000;
+
+connectDb()
+  .then(() => {
+    app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+  })
+  .catch((err) => {
+    console.error("Failde to connect to MongoDB", err);
+  });
