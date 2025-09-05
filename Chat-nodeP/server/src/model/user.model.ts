@@ -18,7 +18,7 @@ const userSchema = new Schema<IUser>(
   {
     username: { type: String, required: true },
     role: { type: String, enum: ["student", "mentor"], required: true },
-    profilePic: {type: String, default:"./user.svg"},
+    profilePic: {type: String, default:""},
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
     payment: { type: Boolean, default: false },

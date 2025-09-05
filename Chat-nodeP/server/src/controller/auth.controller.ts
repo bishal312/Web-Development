@@ -6,7 +6,9 @@ import { upsertStreamUser } from "../lib/streamConfig";
 
 export const register = async (req: Request, res: Response) => {
   try {
-    const { username, role, email, password, profilePic } = req.body;
+    const { username, role, email, password } = req.body;
+
+    const profilePic = req.file ? req.file.filename : "user.svg";
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -25,14 +27,13 @@ export const register = async (req: Request, res: Response) => {
       role,
       email,
       password,
-      profilePic: profilePic || "./user.svg",
+      profilePic,
     });
 
     try {
       await upsertStreamUser({
         id: user._id.toString(),
         name: user.username,
-        role: user.role,
         profilePic: user.profilePic,
       });
       console.log(`Stream user created for ${user.username}`);

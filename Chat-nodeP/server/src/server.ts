@@ -7,13 +7,18 @@ import chatRoutes from "./routes/chat.route";
 import allUser from ".//routes/user.route";
 import path from "path";
 import { fileURLToPath } from "url";
+import fs from "fs";
 
 import dotenv from "dotenv";
 dotenv.config();
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+const uploadDir = path.join(__dirname, "../uploads");
 
+if (!fs.existsSync(uploadDir)) {
+  fs.mkdirSync(uploadDir, { recursive: true });
+}
 const app = express();
 app.use(express.json());
 app.use(cookieParser());
@@ -27,6 +32,7 @@ app.get("/", (req, res) => {
   res.send("API is running");
 });
 app.use(express.static(path.join(__dirname, "../public")));
+app.use("/uploads", express.static(path.join(__dirname, "../uploads")));
 
 app.use("/api/auth", authRoutes);
 app.use("/api/users", allUser);

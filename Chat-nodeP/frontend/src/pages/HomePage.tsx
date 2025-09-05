@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { getAllUsers } from "../lib/api";
+import { Link } from "react-router";
 
 type User = {
   _id: string;
@@ -30,13 +31,15 @@ const HomePage = () => {
           className="card bg-base-200 shadow-md rounded-2xl p-4 flex flex-col items-center text-center"
         >
           <img
-            src={user.profilePic || "/default-avatar.png"}
+            src={`http://localhost:5000/uploads/${user?.profilePic}`}
             alt={user.username}
-            className="w-20 h-20 rounded-full mb-4 object-cover"
+            className="w-20 h-20 rounded-full mb-4 object-contain"
           />
           <h2 className="text-lg font-semibold">{user.username}</h2>
           <p className="text-sm text-gray-500 mb-3">{user.email}</p>
-          <button className="btn btn-primary w-full">Chat</button>
+          <Link to={`/chat/${user._id}`} className="btn btn-outline w-full">
+            Chat Now
+          </Link>
         </div>
       ))}
     </div>

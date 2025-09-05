@@ -3,9 +3,11 @@ import { BellIcon, LogOutIcon, ShipWheelIcon } from "lucide-react";
 import ThemeSelector from "./ThemeSelector";
 import useLogout from "../hooks/useLogout";
 import useAuthUser from "../hooks/useAuthUser";
+import { useQueryClient } from "@tanstack/react-query";
 
 const Navbar = () => {
-  const {authUser} = useAuthUser();
+  const queryClient = useQueryClient();
+  const { authUser } = useAuthUser();
   const location = useLocation();
   const isChatPage = location.pathname?.startsWith("/chat");
 
@@ -16,6 +18,16 @@ const Navbar = () => {
   // });
 
   const { logoutMutation } = useLogout();
+  const handleLogout = () => {
+    logoutMutation(undefined, {
+      onSuccess: () => {
+        queryClient.setQueriesData({
+          queryKey: ["authUser"]
+        }, null);
+        queryClient.invalidateQueries({ queryKey: ["authUser"] });
+      }
+    })
+  }
 
   return (
     <nav className="bg-base-200 border-b border-base-300 sticky top-0 z-30 h-16 flex items-center">
@@ -46,12 +58,12 @@ const Navbar = () => {
 
           <div className="avatar">
             <div className="w-9 rounded-full">
-              <img className="object-cover" src={authUser?.profilePic} alt="User Avatar" rel="noreferrer" />
+              <img className="object-contain" src={`http://localhost:5000/uploads/${authUser?.profilePic}`} alt="User Avatar" rel="noreferrer" />
             </div>
           </div>
 
           {/* Logout button */}
-          <button className="btn btn-ghost btn-circle" onClick={() => logoutMutation()}>
+          <button className="btn btn-ghost btn-circle" onClick={() => handleLogout()}>
             <LogOutIcon className="h-6 w-6 text-base-content opacity-70" />
           </button>
         </div>

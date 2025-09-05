@@ -4,7 +4,7 @@ import { getStreamToken } from "../controller/chat.controller";
 
 const router = Router();
 
-router.post("/token", authMiddleware, getStreamToken );
+router.get("/token", authMiddleware, getStreamToken );
 // router.post("send-message", authMiddleware, sendMessage);
 
 export default router;
