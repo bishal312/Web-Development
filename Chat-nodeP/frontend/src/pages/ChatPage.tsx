@@ -25,9 +25,11 @@ const ChatPage = () => {
   const [channel, setChannel] = useState<Channel | null>(null);
   const [loading, setLoading] = useState(true);
 
+  const BASE_URL = import.meta.env.VITE_API_URL;
+
   const imageUrl = authUser?.profilePic
-    ? `http://localhost:5000/uploads/${authUser.profilePic}`
-    : "http://localhost:5000/uploads/user.svg";
+    ? `${BASE_URL}uploads/${authUser.profilePic}`
+    : `${BASE_URL}/uploads/user.svg`;
 
   const { data: tokenData } = useQuery({
     queryKey: ["streamToken"],
