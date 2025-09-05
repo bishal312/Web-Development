@@ -1,7 +1,9 @@
 import { axiosInstance } from "./axios";
 
 export const getAuthUser = async () => {
-  const res = await axiosInstance.get("/api/auth/me");
+  const res = await axiosInstance.get("/api/auth/me", {
+    withCredentials: true,
+  });
   return res.data;
 };
 
@@ -42,7 +44,7 @@ export const getAllUsers = async () => {
   return response.data;
 };
 
-export const getStreamToken = async () =>{
+export const getStreamToken = async () => {
   const response = await axiosInstance.get("/api/chat/token");
   return response.data;
-}
+};
