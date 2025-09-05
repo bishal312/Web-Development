@@ -1,14 +1,21 @@
 {
   "name": "chat-nodep",
-  "module": "index.ts",
   "type": "module",
   "private": true,
   "scripts": {
-    "dev": "tsx ./src/server.ts"
+    "dev": "tsx ./src/server.ts",
+    "build": "tsup src/server.ts --format esm --out-dir dist",
+    "start": "node ./dist/server.js"
   },
   "devDependencies": {
     "@types/bun": "latest",
+    "@types/cookie-parser": "^1.4.9",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.3",
+    "@types/multer": "^2.0.0",
+    "@types/node": "^24.3.1",
     "ts-node": "^10.9.2",
+    "tsup": "^8.5.0",
     "tsx": "^4.20.5",
     "typescript": "^5.9.2"
   },
@@ -16,18 +23,13 @@
     "typescript": "^5.9.2"
   },
   "dependencies": {
-    "@types/cookie-parser": "^1.4.9",
-    "@types/cors": "^2.8.19",
-    "@types/express": "^5.0.3",
-    "@types/multer": "^2.0.0",
     "bcrypt": "^6.0.0",
     "bcryptjs": "^3.0.2",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
     "dotenv": "^17.2.1",
-    "express": "^5.1.0",
+    "express": "4",
     "jsonwebtoken": "^9.0.2",
-    "jwt": "^0.2.0",
     "mongoose": "^8.18.0",
     "multer": "^2.0.2",
     "stream-chat": "^9.18.1"
