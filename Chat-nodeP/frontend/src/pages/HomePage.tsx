@@ -9,6 +9,7 @@ type User = {
   profilePic?: string;
 };
 
+const BASE_URL = import.meta.env.VITE_API_URL;
 const HomePage = () => {
   const { data: users = [], isLoading } = useQuery<User[]>({
     queryKey: ["users"],
@@ -31,7 +32,7 @@ const HomePage = () => {
           className="card bg-base-200 shadow-md rounded-2xl p-4 flex flex-col items-center text-center"
         >
           <img
-            src={`http://localhost:5000/uploads/${user?.profilePic}`}
+            src={`${BASE_URL}/uploads/${user.profilePic}`}
             alt={user.username}
             className="w-20 h-20 rounded-full mb-4 object-contain"
           />

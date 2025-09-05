@@ -5,6 +5,7 @@ import useLogout from "../hooks/useLogout";
 import useAuthUser from "../hooks/useAuthUser";
 import { useQueryClient } from "@tanstack/react-query";
 
+
 const Navbar = () => {
   const queryClient = useQueryClient();
   const { authUser } = useAuthUser();
@@ -26,9 +27,10 @@ const Navbar = () => {
         }, null);
         queryClient.invalidateQueries({ queryKey: ["authUser"] });
       }
-    })
+    }); 
   }
 
+  const BASE_URL = import.meta.env.VITE_API_URL;
   return (
     <nav className="bg-base-200 border-b border-base-300 sticky top-0 z-30 h-16 flex items-center">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -58,7 +60,7 @@ const Navbar = () => {
 
           <div className="avatar">
             <div className="w-9 rounded-full">
-              <img className="object-contain" src={`http://localhost:5000/uploads/${authUser?.profilePic}`} alt="User Avatar" rel="noreferrer" />
+              <img className="object-contain" src={`${BASE_URL}/uploads/${authUser.profilePic}`} alt="User Avatar" rel="noreferrer" />
             </div>
           </div>
 
