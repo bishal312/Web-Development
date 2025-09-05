@@ -32,7 +32,7 @@ const HomePage = () => {
           className="card bg-base-200 shadow-md rounded-2xl p-4 flex flex-col items-center text-center"
         >
           <img
-            src={`${BASE_URL}/uploads/${user.profilePic}`}
+            src={user.profilePic ? `${BASE_URL}/uploads/${user.profilePic}` : `${BASE_URL}/uploads/user.svg`}
             alt={user.username}
             className="w-20 h-20 rounded-full mb-4 object-contain"
           />
