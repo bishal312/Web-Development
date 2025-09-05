@@ -21,7 +21,7 @@ export const register = async (signUpData: {
     formData.append("profilePic", signUpData.profilePic);
   }
 
-  const response = await axiosInstance.post("/auth/register", formData, {
+  const response = await axiosInstance.post("api/auth/register", formData, {
     headers: { "Content-Type": "multipart/form-data" },
   });
   return response.data;
