@@ -21,8 +21,8 @@ if (!fs.existsSync(uploadDir)) {
 }
 
 const allowedOrigins = [
-  'https://nepalipool.netlify.app',
-  'http://localhost:5173',
+  "https://nepalipool.netlify.app",
+  "http://localhost:5173",
 ];
 
 const app = express();
@@ -37,6 +37,11 @@ app.use(
 app.get("/", (req, res) => {
   res.send("API is running");
 });
+
+app.use("/api/auth", authRoutes);
+app.use("/api/users", allUser);
+app.use("/api/chat", chatRoutes);
+
 app.use(express.static(path.join(__dirname, "../public")));
 app.use("/uploads", express.static(path.join(__dirname, "../uploads")));
 
@@ -44,10 +49,6 @@ app.use(express.static(path.join(__dirname, "../frontend/dist")));
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "../frontend/dist/index.html"));
 });
-
-app.use("/api/auth", authRoutes);
-app.use("/api/users", allUser);
-app.use("/api/chat", chatRoutes);
 
 const PORT = process.env.PORT || 5000;
 
