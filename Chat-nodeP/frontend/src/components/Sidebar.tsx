@@ -7,6 +7,7 @@ const Sidebar = () => {
   const location = useLocation();
   const currentPath = location.pathname;
 
+  const BASE_URL = import.meta.env.VITE_API_URL;
   return (
     <aside className="w-64 bg-base-200 border-r border-base-300 hidden lg:flex flex-col h-screen sticky top-0">
       <div className="p-5 border-b border-base-300">
@@ -21,9 +22,8 @@ const Sidebar = () => {
       <nav className="flex-1 p-4 space-y-1">
         <Link
           to="/"
-          className={`btn btn-ghost justify-start w-full gap-3 px-3 normal-case ${
-            currentPath === "/" ? "btn-active" : ""
-          }`}
+          className={`btn btn-ghost justify-start w-full gap-3 px-3 normal-case ${currentPath === "/" ? "btn-active" : ""
+            }`}
         >
           <HomeIcon className="size-5 text-base-content opacity-70" />
           <span>Home</span>
@@ -35,11 +35,11 @@ const Sidebar = () => {
         <div className="flex items-center gap-3">
           <div className="avatar">
             <div className="w-10 rounded-full">
-              <img src={authUser?.profilePic} alt="User Avatar" />
+              <img src={`${BASE_URL}/uploads/${authUser.profilePic}`} alt="User Avatar" />
             </div>
           </div>
           <div className="flex-1">
-            <p className="font-semibold text-sm">{authUser?.fullName}</p>
+            <p className="font-semibold text-sm">{authUser?.username}</p>
             <p className="text-xs text-success flex items-center gap-1">
               <span className="size-2 rounded-full bg-success inline-block" />
               Online
