@@ -48,11 +48,3 @@ export const authMiddleware = async (
     res.status(500).json({ message: "Internal Server Error" });
   }
 };
-
-export const logout = async (req: Request, res: Response) => {
-  res.clearCookie("jwt", {
-    sameSite: "strict",
-    secure: true,
-  });
-  res.status(200).json({ success: true, message: "user logout successfully" });
-};

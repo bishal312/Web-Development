@@ -1,6 +1,6 @@
 import express, { Request, Response } from "express";
-import { login, register } from "../controller/auth.controller";
-import { authMiddleware, logout } from "../middleware/authenticate";
+import { login, logout, register } from "../controller/auth.controller";
+import { authMiddleware } from "../middleware/authenticate";
 import multer from "multer";
 
 const router = express.Router();
